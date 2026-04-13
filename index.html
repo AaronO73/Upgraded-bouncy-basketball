@@ -3,64 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Neon Street Hoops</title>
+    <title>Court Legends 2.5D</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="hud">
-      <div class="brand">
-        <h1>Neon Street Hoops</h1>
-        <p>Modern 2D physics basketball</p>
+    <header class="topbar">
+      <div>
+        <h1>Court Legends 2.5D</h1>
+        <p>Arcade energy + simulation-inspired basketball systems</p>
       </div>
-      <div class="controls">
-        <label>
-          Mode
+      <div class="menu-grid">
+        <label>Mode
           <select id="modeSelect">
             <option value="quick">Quick Match</option>
             <option value="tournament">Tournament</option>
+            <option value="practice">Practice</option>
+            <option value="dunk">Dunk Contest</option>
+            <option value="career">Career Run</option>
           </select>
         </label>
-        <label>
-          Team Size
-          <select id="teamSize">
+        <label>Format
+          <select id="formatSelect">
             <option value="1">1v1</option>
-            <option value="2">2v2</option>
+            <option value="2" selected>2v2</option>
+            <option value="3">3v3</option>
           </select>
         </label>
-        <label>
-          Difficulty
-          <select id="difficulty">
+        <label>Difficulty
+          <select id="difficultySelect">
             <option value="easy">Easy</option>
             <option value="medium" selected>Medium</option>
             <option value="hard">Hard</option>
           </select>
         </label>
-        <label>
-          Character
-          <select id="character"></select>
+        <label>Team
+          <select id="teamSelect"></select>
         </label>
-        <button id="startBtn">Start Match</button>
+        <button id="startBtn">Start Game</button>
       </div>
     </header>
 
     <main>
-      <canvas id="game" width="1200" height="675"></canvas>
-      <aside class="panel">
+      <section class="arena-wrap">
+        <canvas id="game" width="1366" height="768"></canvas>
+        <div id="meterWrap" class="meter-wrap">
+          <div id="meterFill" class="meter-fill"></div>
+          <div class="perfect-zone"></div>
+        </div>
+      </section>
+
+      <aside class="sidebar">
         <h2>Controls</h2>
         <ul>
-          <li><strong>A/D</strong> or <strong>←/→</strong>: Move</li>
-          <li><strong>W</strong> or <strong>↑</strong>: Jump / contest</li>
-          <li><strong>J</strong>: Dribble burst</li>
-          <li><strong>K</strong>: Shoot (hold for power, release for timing)</li>
-          <li><strong>L</strong>: Steal / block attempt</li>
-          <li><strong>R</strong>: Replay last score</li>
+          <li>Move: <b>WASD / Arrows</b></li>
+          <li>Sprint: <b>Shift</b></li>
+          <li>Dribble Move: <b>J</b> (crossover / spin / behind-back)</li>
+          <li>Pass: <b>U</b> (chest) / <b>I</b> (bounce) / <b>O</b> (alley-oop)</li>
+          <li>Shoot: <b>K</b> (tap = layup, hold = jumper)</li>
+          <li>Dunk / Block: <b>Space</b></li>
+          <li>Steal / Contest: <b>L</b></li>
+          <li>Replay: <b>R</b></li>
         </ul>
 
-        <h2>Progression</h2>
-        <p id="xpText"></p>
-        <p id="unlocks"></p>
+        <h2>Progress</h2>
+        <p id="profileText"></p>
+        <p id="skillText"></p>
 
-        <h2>Leaderboard</h2>
+        <h2>Leaderboards</h2>
         <ol id="leaderboard"></ol>
       </aside>
     </main>

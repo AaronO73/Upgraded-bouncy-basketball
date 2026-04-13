@@ -1,65 +1,57 @@
-# Neon Street Hoops (Modern 2D Basketball)
+# Court Legends 2.5D
 
-A browser-playable 2D basketball game designed to feel faster and deeper than retro basketball physics games.
+A modern basketball game prototype focused on realistic-feeling physics, snappy arcade controls, and progression depth.
 
-## Why this engine choice?
+## Engine recommendation (production)
 
-For this prototype, I used **HTML5 Canvas + vanilla JavaScript** because:
+For the full vision (premium animations, mocap pipelines, ragdolls, advanced camera system, online multiplayer), use:
 
-- immediate play in browser (no install)
-- very fast iteration for physics/game-feel tuning
-- easy migration path to Godot or Unity once mechanics are proven
+- **Unreal Engine 5** (best for high-end 3D realism + animation tools + cinematic pipelines), or
+- **Unity URP/HDRP** (strong tooling and faster iteration for indie/AA teams).
 
-For production:
-- **Best overall recommendation: Godot 4** for this design scope (strong 2D tools, easy networking, free/open source).
-- **Unity** is also a great option if your team already uses C# and needs larger plugin ecosystems.
+This repository ships a **2.5D Canvas prototype** to validate gameplay loops and systems quickly before migrating to a full 3D engine.
 
-## Features implemented
+## Implemented systems
 
-- 1v1 and 2v2 team size toggle
-- Physics movement with gravity, momentum, bounce, collisions
-- Timing + power shooting with arc trajectories
-- Dribble burst, steal attempts, jump/block contest behavior
-- Adaptive AI by difficulty (easy/medium/hard), fake shots, defensive repositioning
-- Quick Match + Tournament mode
-- Character unlock progression with stat differences
-- Perk unlocks and leaderboard (saved in localStorage)
-- Replay highlights + slow-motion scoring moments
-- Dynamic court lighting feel, crowd stripe animation, screen shake juice
+- Quick Match, Tournament, Practice, Dunk Contest, Career Run mode flow
+- 1v1 / 2v2 / 3v3 format selector
+- 2.5D movement and momentum (x/y court plane + z jump axis)
+- Ball physics with arc, spin, bounce, rim collisions, and possession
+- Shot meter with green-release timing window
+- Shot types: layup, dunk, mid-range jumper, three-point
+- Dribble move triggers: crossover, spin, behind-the-back
+- Passing types: chest pass, bounce pass, alley-oop setup
+- Defense actions: steal attempt, jump contest / blocking windows
+- Adaptive AI memory (drive/pull-up/pass behavior shifts)
+- Team identity layer with fictional brands:
+  - Neon City Ballers
+  - Steel Court Titans
+  - Sunset Flyers
+- Progression:
+  - persistent XP/level
+  - attributes (speed, strength, vertical, accuracy, handling)
+  - unlockable skills (euro step, posterizer, deep range)
+  - cosmetic unlock entries in career
+- Replay system, screen shake, slow-motion highlights, modern HUD
 
-## Basic architecture / pseudocode
+## Modular architecture (target migration structure)
 
 ```text
-GameLoop:
-  dt = frame delta
-  readInput()
-  updatePlayers(dt)
-  updateAI(dt)
-  updateBallPhysics(dt)
-  resolvePossession()
-  detectScore()
-  triggerFX(screenShake, slowMo, replay)
-  renderCourtAndEntities()
-
-Shoot(player, holdDuration):
-  targetHoop = enemy hoop
-  angle = atan2(playerToHoop)
-  timingScore = f(holdDuration vs perfectWindow)
-  power = base + hold + distanceFactor
-  ball.velocity = polar(angle, power)
-  shotQuality = timingScore + perks - defensivePressure
-
-AI(playerAI):
-  if hasBall:
-    maybeFakeShot()
-    repositionTowardBestShotRange()
-    shootByDifficultyReaction()
-  else:
-    trackBallOrBallHandler()
-    attemptStealWhenInRange()
-    jumpContestByDifficulty()
+/Systems
+  PlayerController
+    - input mapping, acceleration/deceleration, dribble state machine
+  BallPhysicsSystem
+    - force + angle shooting, spin, rim/backboard collisions
+  AnimationGraph
+    - locomotion blend, procedural foot IK, shot/land transitions
+  AISystem
+    - offense/defense state machine, habit-adaptive difficulty, teammate logic
+  ProgressionSystem
+    - XP, attributes, skill tree, cosmetics, persistence
+  PresentationSystem
+    - camera, shot meter UI, replay timeline, VFX/audio triggers
 ```
 
-## Run locally
+## How to run
 
 Open `index.html` in a browser.
