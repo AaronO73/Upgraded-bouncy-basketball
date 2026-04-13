@@ -1,0 +1,104 @@
+:root {
+  --bg: #080d1a;
+  --court: #0f2f47;
+  --line: #f5e9ca;
+  --accent: #4df3ff;
+  --good: #35f27b;
+  --bad: #ff4d8d;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #1a2855 10%, var(--bg) 60%);
+  color: #f3f7ff;
+}
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  gap: 1rem;
+  border-bottom: 1px solid #2f426d;
+  background: rgba(8, 13, 26, 0.72);
+  backdrop-filter: blur(6px);
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+.brand p {
+  margin: 0.15rem 0 0;
+  color: #b9c8f3;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  gap: 0.6rem;
+  align-items: end;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.82rem;
+  gap: 0.25rem;
+}
+
+select,
+button {
+  border-radius: 8px;
+  border: 1px solid #3f5586;
+  padding: 0.5rem;
+  color: white;
+  background: #121e3f;
+}
+
+button {
+  cursor: pointer;
+  border-color: var(--accent);
+}
+
+main {
+  display: grid;
+  grid-template-columns: minmax(600px, 1fr) 300px;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid #335086;
+  background: linear-gradient(#193f66, #0a1e32 70%);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+.panel {
+  background: rgba(9, 17, 36, 0.9);
+  border-radius: 12px;
+  border: 1px solid #31467a;
+  padding: 1rem;
+}
+
+h2 {
+  margin: 1rem 0 0.4rem;
+  font-size: 1rem;
+  color: var(--accent);
+}
+
+ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+li {
+  margin-bottom: 0.35rem;
+}
